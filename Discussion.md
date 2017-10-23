@@ -61,35 +61,30 @@ print P2
 # Փոփոխություններից հետո
 __Ներկայացման տեսքը__
 ````
+// Definitions
 P1(x) = -x^3 + 3x^2 - 1
 P2(x) = 4x + 7
-P3(x) = (P1(x) + P2(x)) * P2(x)՛
-P4    = P3(2)՛՛
-P5(x) = P2(x)^2
-print P4
+// Operations
+P3(x) = (P1(x) + P2(x)) * P2(x)'
+P4(x) = P3(2)'' - P2(x)
 print P3(x)
 ````
 
 __Լեզվի քերականությունը__
 
 ````
-Program    = {[Newlines] (Statement | Print) Newlines}.
-Print      = 'print' Poly.
-Poly       = (ID ['(' LETTER | NUMBER')']).
-Statement  = Poly '=' (Expr | Operations).
-Expr       = NUMBER | LETTER.
-Factor     = Expr | '(' Expr ')'.
-Unary      = ['-'] Factor.
-Power      = Unary ['^' NUMBER].
-Mult       = Power {Power}.
-Add        = Mult  {(+ | -) Mult}.
-Operations = (Padd | Pmult | Pderive | Ppower | Peval) Newlines.
-Pexpr      = Poly.
-Pfactor    = Pexpr | '(' Pexpr ')'.
-Punary     = ['-'] Pfactor.
-Pderive    = Punary {'՛'}.
-Peval      = Pderive.
-Pmult      = Peval {(* | /) Peval}.
-Padd       = Pmult {(+ | -) Pmult}.
-Newlinws   = NL {NL}.
+Program  = {[Newlines] (Def | Op) Newlines}.
+Def      = Name '=' Body.       
+Name     = ID '(' (ID | NUM) ')'. 
+Body     = Elem {(+ | -) Elem}.
+Elem     = NUM | [NUM] ID ['^' NUM].
+Op       = (Name '=' (Add | Mult | Derive | Eval)) | Print Newlines.
+Factor   = Name | '(' Name ')'.
+Unary    = ['-'] Factor.
+Derive   = Unary {'''}.
+Eval     = Derive.
+Mult     = Eval {(* | /) Eval}.
+Add      = Mult {(+ | -) Mult}.
+Print    = 'print' Name.
+Newlinws = NL {NL}.
 ````
