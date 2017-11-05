@@ -134,3 +134,20 @@ Simple = '(' Expr ')'
 	   | ID '\'' '(' ID ')'
 	   | ID '(' NUM ')'.
 ````
+
+__Քերականությունը ուղղումներից հետո__
+````
+Program    = [NewLines] { (Definition | Statement) NewLines }.
+Definition = Name '=' Polynom.
+Name       = ID '(' ID ')'.
+Polynom    = ['+'|'-'] Element { ('+'|'-') Element }.
+Element    = NUM | [NUM] ID ['^' NUM].
+Statement  = Name '=' Expr | PRINT Expr.
+Expr       = Mult   { ( '+' | '-' ) Mult }.
+Mult       = Simple { ( '*' | '/' ) Simple }.
+Simple     = '(' Expr ')'
+           | Name
+           | ID '\''{'\''} '(' ID ')'
+           | ID '(' NUM ')'.
+Newlinws   = NL {NL}.
+````
