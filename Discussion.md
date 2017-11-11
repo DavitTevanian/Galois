@@ -62,8 +62,8 @@ print P2
 __Ներկայացման տեսքը__
 ````
 // Definitions
-P1(x) = -x^3 + 3x^2 - 1
-P2(x) = 4x + 7
+P1(x) := -x^3 + 3x^2 - 1
+P2(x) := 4x + 7
 // Operations
 P3(x) = (P1(x) + P2(x)) * P2(x)'
 P4(x) = P3(2)'' - P2(x)
