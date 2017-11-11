@@ -138,7 +138,7 @@ Simple = '(' Expr ')'
 __Քերականությունը ուղղումներից հետո__
 ````
 Program    = [NewLines] { (Definition | Statement) NewLines }.
-Definition = Name '=' Polynom.
+Definition = Name ':=' Polynom.
 Name       = ID '(' ID ')'.
 Polynom    = ['+'|'-'] Element { ('+'|'-') Element }.
 Element    = NUM | [NUM] ID ['^' NUM].
