@@ -12,8 +12,8 @@ __Language Usage__
 P1(x) := -x^3 + 3x^2 - 1
 P2(x) := 4x + 7
 # Statements
-P3(x) = (P1(x) + P2(x)) * P2(x)'
-P4(x) = P3(2)'' - P2(x)
+P3(x) = (P1(x) + P2(x)) * P2'(x)
+P4(x) = P3''(x) - P2(x)
 print P3(x)
 ````
 
