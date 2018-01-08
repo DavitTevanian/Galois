@@ -62,8 +62,8 @@ print P2
 __Ներկայացման տեսքը__
 ````
 // Definitions
-P1(x) = -x^3 + 3x^2 - 1
-P2(x) = 4x + 7
+P1(x) := -x^3 + 3x^2 - 1
+P2(x) := 4x + 7
 // Operations
 P3(x) = (P1(x) + P2(x)) * P2(x)'
 P4(x) = P3(2)'' - P2(x)
@@ -87,4 +87,67 @@ Mult     = Eval {(* | /) Eval}.
 Add      = Mult {(+ | -) Mult}.
 Print    = 'print' Name.
 Newlinws = NL {NL}.
+````
+
+__Նոր լրացումներ և ուղղումներ__
+
+
+Ծրագիրը սահմանումների ու հրամանների հաջորդականություն է․
+
+````
+Program = [NewLines] { (Definition | Statement) NewLines }.
+````
+
+Սահմանման միջոցավ բազմանդամը կապվում է որևէ անուն․
+
+````
+Definition = Name '=' Polynom.
+````
+
+Անունն իր մեջ պարունակում է նաև բազմանդամի փոփոխականը․
+
+````
+Name = ID '(' ID ')'.
+````
+
+Բազմանդամն իրար `+` կամ `-` սիմվոլներով միացած տարրերի հաջորդականություն է․
+
+````
+Polynom = ['+'|'-'] Element '{' ('+'|'-') Element }.
+Element = NUM | [NUM] ID ['^' NUM].
+````
+
+Հրամաններից մեկը բազմանդամի արտածումն է․
+
+````
+Statement = PRINT Expr
+    | .... .
+````
+
+Բազմանդամները կարող են գումարվել իրար, բազմապատկվել մեկը մյուսի հետ, կարելի է հաշվել բազմանդամի ածանցյալը, կարելի է հաշվել բազմանդամի արժեքը տրված թվի համար․
+
+````
+Expr = Mult { '+' Mult }.
+Mult = Simple { '*' Simple }.
+Simple = '(' Expr ')'
+       | Name
+	   | ID '\'' '(' ID ')'
+	   | ID '(' NUM ')'.
+````
+
+__Քերականությունը ուղղումներից հետո__
+````
+Program    = [NewLines] { (Definition | Statement) NewLines }.
+Definition = Name ':=' Polynom.
+Name       = ID '(' ID ')'.
+Polynom    = ['+'|'-'] Element { ('+'|'-') Element }.
+Element    = NUM | [NUM] ID ['^' NUM].
+Statement  = Name '=' Expr | PRINT Expr.
+Expr       = Mult   { ( '+' | '-' ) Mult }.
+Mult       = Simple { ( '*' | '/' ) Simple }.
+Simple     = '(' Expr ')'
+           | Name
+           | ID '\''{'\''} '(' ID ')'
+           | ID '(' NUM ')'.
+Newlinws   = NL {NL}.
 ````
